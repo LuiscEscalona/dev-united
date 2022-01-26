@@ -1,21 +1,45 @@
 import React from "react";
+import { firestore } from "../firebase";
+import Photo from "../resources/svg/ornacia.svg";
+import Post from "../resources/svg/buttonpost.svg";
 
-function TweetForm(props) {
+function TweetForm({ tweet, setTweet, user }) {
+  console.log(user);
+  const handleChange = (e) => {
+    let nuevoTweet = {
+      tweet: e.target.value,
+      uid: user.uid,
+      email: user.email,
+      autor: user.displayName,
+    };
+    setTweet(nuevoTweet);
+  };
+
+  const sendTweet = (e) => {
+    e.preventDefault();
+
+    firestore.collection("tweets").add(tweet);
+  };
+
   return (
     <div className="tweetForm-container">
       <div>
-        <div className="tweetForm-photo">FOTO</div>
+        <img
+          className="tweetForm-photo"
+          src={user ? user.photoURL : Photo}
+          alt=""
+        />
         <form>
           <textarea
-            // value={tweet.tweet}
+            value={tweet.tweet}
             name="tweet"
-            // onChange={handleChange}
+            onChange={handleChange}
             cols="30"
             rows="5"
             placeholder="What's happening?"
           />
           <div>200 max.</div>
-          <button>POST</button>
+          <img src={Post} alt="" onClick={sendTweet} className="post-button" />
         </form>
       </div>
     </div>

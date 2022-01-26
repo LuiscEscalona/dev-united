@@ -4,8 +4,109 @@
   box-sizing: border-box;
 }
 
+.welcome-page-container {
+  width: 100%;
+  height: 980px;
+  display: flex;
+  color: whitesmoke;
+  background-color: rgba(46, 19, 44, 1);
+}
+
+.welcome-page-container > div {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome-page-container div + div {
+  flex-direction: column;
+}
+
+.welcome-page-container h1 {
+  width: 433px;
+  margin-bottom: 38px;
+  /* font-family: Silkscreen; */
+  font-style: normal;
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 50px;
+  text-transform: uppercase;
+}
+
+.welcome-page-container h3 {
+  width: 433px;
+  margin-bottom: 38px;
+  /* font-family: Fira Code; */
+  font-style: normal;
+  font-weight: 450;
+  font-size: 24px;
+  line-height: 31px;
+}
+
+.welcome-page-container input {
+  width: 425px;
+  height: 67px;
+  padding: 10px;
+  margin-bottom: 30px;
+  /* font-family: Fira Code; */
+  font-style: normal;
+  font-weight: 450;
+  font-size: 24px;
+  line-height: 31px;
+  color: #914d8b;
+  background-color: rgba(21, 7, 20, 1);
+}
+
+.welcome-page-container span {
+  margin-top: 160px;
+  /* font-family: Fira Code; */
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.colorpicker {
+  width: 425px;
+  height: 58px;
+  margin-bottom: 52px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.colorbox {
+  width: 58px;
+  height: 100%;
+}
+
+.pink {
+  background: rgba(245, 13, 90, 1);
+}
+
+.orange {
+  background: rgba(255, 134, 92, 1);
+}
+
+.yellow {
+  background: rgba(255, 234, 92, 1);
+}
+
+.green {
+  background: rgba(0, 218, 118, 1);
+}
+
+.blue {
+  background: rgba(0, 150, 206, 1);
+}
+
+.violet {
+  background: rgba(128, 15, 255, 1);
+}
+
 .header-container {
-  height: 55px;
+  height: 60px;
   display: flex;
   justify-content: center;
   background-color: rgba(37, 12, 35, 1);
@@ -19,16 +120,24 @@
   color: whitesmoke;
 }
 
+.header-photo {
+  height: 50px;
+  border: solid 1px;
+  border-radius: 50px;
+  border-color: yellow;
+}
+
 .tweetForm-container {
   height: 220px;
   display: flex;
   justify-content: center;
+  border-bottom: solid 2px rgba(96, 38, 91, 1);
   background-color: rgba(21, 7, 20, 1);
 }
 
 .tweetForm-container > div {
   width: 50%;
-  padding-top: 20px;
+  padding: 20px 0px 20px 0px;
   display: flex;
   justify-content: space-between;
   color: whitesmoke;
@@ -46,16 +155,20 @@ form {
   width: 80%;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: flex-end;
-}
-
-form div {
-  margin: 14px 0px 14px 0px;
 }
 
 textarea {
   width: 100%;
   height: 113px;
+}
+
+.post-button {
+}
+
+.post-button:hover {
+  border: solid 1px rgba(255, 234, 92, 1);
 }
 
 .feed {
@@ -68,7 +181,8 @@ textarea {
 
 .tweet-container {
   width: 50%;
-  padding: 20px 0px 20px 0px;
+  padding: 25px 0px 25px 0px;
+  border-bottom: solid 2px rgba(96, 38, 91, 1);
   display: flex;
   justify-content: space-between;
   color: whitesmoke;
@@ -81,4 +195,20 @@ textarea {
 .tweet-data div {
   display: flex;
   justify-content: space-between;
+}
+
+.tweet-autor {
+  padding: 5px;
+  text-transform: uppercase;
+  color: rgba(46, 19, 44, 1);
+}
+
+.tweet-data p {
+  margin: 15px 0px 25px 0px;
+  /* font-family: Fira Code; */
+  font-style: normal;
+  font-weight: 450;
+  font-size: 18px;
+  line-height: 24px;
+  color: whitesmoke;
 }
