@@ -3,6 +3,7 @@ import WelcomePage from "./components/WelcomePage.jsx";
 import Header from "../src/components/Header";
 import TweetForm from "./components/TweetForm";
 import Feed from "./components/Feed";
+import Profile from "./components/profile/Profile.jsx";
 import "./App.css";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         tweet={tweet}
         setTweet={setTweet}
       />
+      <Profile user={user} />
     </>
   );
 }
