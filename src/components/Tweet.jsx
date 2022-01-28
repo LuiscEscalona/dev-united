@@ -6,7 +6,7 @@ import Delete from "../resources/svg/delete.svg";
 import FullLike from "../resources/svg/fulllike.svg";
 import EmptyLike from "../resources/svg/emptylike.svg";
 
-function Tweet({ tweets, user }) {
+function Tweet({ tweets, user, color }) {
   const deleteTweet = (id) => {
     firestore.doc(`tweets/${id}`).delete();
   };
@@ -42,8 +42,10 @@ function Tweet({ tweets, user }) {
             <div className="tweet-data">
               <div>
                 <h3>
-                  <span className="tweet-autor yellow">{tweet.autor}</span> -
-                  fecha
+                  <span className="tweet-autor" id={color ? color : "white"}>
+                    {tweet.autor}
+                  </span>{" "}
+                  - fecha
                 </h3>
                 {!user ? null : user.uid === tweet.uid ? (
                   <img

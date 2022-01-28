@@ -15,11 +15,12 @@ function App() {
     uid: "",
     mail: "",
   });
+  const [color, setColor] = useState("");
 
   return (
     <>
-      <WelcomePage user={user} />
-      <Header user={user} />
+      <WelcomePage user={user} color={color} setColor={setColor} />
+      <Header user={user} color={color} />
       <TweetForm user={user} tweet={tweet} setTweet={setTweet} />
       <Feed
         user={user}
@@ -28,8 +29,9 @@ function App() {
         setTweets={setTweets}
         tweet={tweet}
         setTweet={setTweet}
+        color={color}
       />
-      <Profile user={user} />
+      <Profile user={user} tweets={tweets} color={color} />
     </>
   );
 }

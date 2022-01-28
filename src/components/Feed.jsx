@@ -4,7 +4,7 @@ import { firestore, auth, logout } from "../firebase";
 import Tweet from "./Tweet";
 import Logout from "../resources/svg/logout.svg";
 
-function Feed({ user, setUser, tweets, setTweets }) {
+function Feed({ user, setUser, tweets, setTweets, color }) {
   useEffect(() => {
     const unsubscribe = firestore
       .collection("tweets")
@@ -30,8 +30,7 @@ function Feed({ user, setUser, tweets, setTweets }) {
   return (
     <>
       <div className="feed">
-        <Tweet tweets={tweets} user={user} />
-        <img src={Logout} alt="" onClick={logout} />
+        <Tweet tweets={tweets} user={user} color={color} />
       </div>
     </>
   );

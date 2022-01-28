@@ -4,7 +4,6 @@ import Photo from "../resources/svg/ornacia.svg";
 import Post from "../resources/svg/buttonpost.svg";
 
 function TweetForm({ tweet, setTweet, user }) {
-  console.log(user);
   const handleChange = (e) => {
     let nuevoTweet = {
       tweet: e.target.value,

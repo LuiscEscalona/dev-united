@@ -6,7 +6,7 @@ import Photo from "../../resources/svg/ornacia.svg";
 import Back from "../../resources/svg/back.svg";
 import Logout from "../../resources/svg/logout.svg";
 
-function UserProfile({ user }) {
+function UserProfile({ user, color }) {
   const [post, setPost] = useState(true);
   const [favorites, setFavorites] = useState(false);
 
@@ -26,14 +26,21 @@ function UserProfile({ user }) {
         <div>
           <div className="username-header">
             <img src={Back} alt="" />
-            <span>Cancuella</span>
+            <span>{user ? user.displayName : "Cancuella"}</span>
           </div>
           <img src={Logout} alt="" onClick={logout} />
         </div>
       </div>
       <div className="username-container">
-        <img className="username-pic" src={Photo} alt="" />
-        <h1 className="username yellow">Cancuella</h1>
+        <img
+          className="username-pic"
+          id={color ? color : "white"}
+          src={user ? user.photoURL : Photo}
+          alt=""
+        />
+        <h1 className="username" id={color ? color : "white"}>
+          {user ? user.displayName : "Cancuella"}
+        </h1>
       </div>
       {user ? (
         <>

@@ -81,28 +81,43 @@
   height: 100%;
 }
 
-.pink {
+.colorbox:hover {
+  border: 3px solid #ffffff;
+}
+
+#pink {
   background: rgba(245, 13, 90, 1);
+  border-color: rgba(245, 13, 90, 1);
 }
 
-.orange {
+#orange {
   background: rgba(255, 134, 92, 1);
+  border-color: rgba(255, 134, 92, 1);
 }
 
-.yellow {
+#yellow {
   background: rgba(255, 234, 92, 1);
+  border-color: rgba(255, 234, 92, 1);
 }
 
-.green {
+#green {
   background: rgba(0, 218, 118, 1);
+  border-color: rgba(0, 218, 118, 1);
 }
 
-.blue {
+#blue {
   background: rgba(0, 150, 206, 1);
+  border-color: rgba(0, 150, 206, 1);
 }
 
-.violet {
+#violet {
   background: rgba(128, 15, 255, 1);
+  border-color: rgba(128, 15, 255, 1);
+}
+
+#white {
+  background: whitesmoke;
+  border-color: whitesmoke;
 }
 
 .header-container {
@@ -122,9 +137,9 @@
 
 .header-photo {
   height: 50px;
-  border: solid 1px;
+  border: solid 3px;
   border-radius: 50px;
-  border-color: yellow;
+  /* border-color: yellow; */
 }
 
 .tweetForm-container {
@@ -146,9 +161,7 @@
 .tweetForm-photo {
   width: 70px;
   height: 70px;
-  border: solid 1px;
   border-radius: 50px;
-  border-color: yellow;
 }
 
 form {
@@ -252,7 +265,7 @@ textarea {
 .username-pic {
   height: 134px;
   border-radius: 50%;
-  border: solid 2px rgba(255, 234, 92, 1);
+  border: solid 3px;
 }
 
 .tabs-container {
