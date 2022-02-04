@@ -3,13 +3,17 @@ import { firestore } from "../firebase";
 import Photo from "../resources/svg/ornacia.svg";
 import Post from "../resources/svg/buttonpost.svg";
 
-function TweetForm({ tweet, setTweet, user }) {
+function TweetForm({ tweet, setTweet, user, username, color }) {
   const handleChange = (e) => {
     let nuevoTweet = {
       tweet: e.target.value,
       uid: user.uid,
       email: user.email,
       autor: user.displayName,
+      username: username.username,
+      photo: user.photoURL,
+      color: color,
+      favorites: [],
     };
     setTweet(nuevoTweet);
   };

@@ -70,19 +70,16 @@
 
 .colorpicker {
   width: 425px;
-  height: 58px;
+  height: 60px;
   margin-bottom: 52px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .colorbox {
   width: 58px;
-  height: 100%;
-}
-
-.colorbox:hover {
-  border: 3px solid #ffffff;
+  height: 58px;
 }
 
 #pink {
@@ -118,6 +115,10 @@
 #white {
   background: whitesmoke;
   border-color: whitesmoke;
+}
+
+.colorbox:hover {
+  border: solid 3px #ffffff;
 }
 
 .header-container {

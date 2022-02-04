@@ -1,15 +1,20 @@
 import React from "react";
-import { useState } from "react";
+
 import { logout } from "../../firebase";
 import Photo from "../../resources/svg/ornacia.svg";
 
 import Back from "../../resources/svg/back.svg";
 import Logout from "../../resources/svg/logout.svg";
 
-function UserProfile({ user, color }) {
-  const [post, setPost] = useState(true);
-  const [favorites, setFavorites] = useState(false);
-
+function UserProfile({
+  user,
+  color,
+  username,
+  post,
+  setPost,
+  favorites,
+  setFavorites,
+}) {
   const clickPost = () => {
     setPost(true);
     setFavorites(false);
@@ -26,7 +31,7 @@ function UserProfile({ user, color }) {
         <div>
           <div className="username-header">
             <img src={Back} alt="" />
-            <span>{user ? user.displayName : "Cancuella"}</span>
+            <span>{username && username.username}</span>
           </div>
           <img src={Logout} alt="" onClick={logout} />
         </div>
@@ -34,12 +39,12 @@ function UserProfile({ user, color }) {
       <div className="username-container">
         <img
           className="username-pic"
-          id={color ? color : "white"}
+          id={username && username.color}
           src={user ? user.photoURL : Photo}
           alt=""
         />
-        <h1 className="username" id={color ? color : "white"}>
-          {user ? user.displayName : "Cancuella"}
+        <h1 className="username" id={username && username.color}>
+          {username ? username.username : "Cancuella"}
         </h1>
       </div>
       {user ? (

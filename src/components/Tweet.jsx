@@ -18,9 +18,35 @@ function Tweet({ tweets, user, color }) {
   //   enableDelete = user.uid;
   // }
 
-  const likeTweet = (id, likes) => {
+  const likeTweet = (id, likes, favorites, uid) => {
     if (!likes) likes = 0;
-    firestore.doc(`tweets/${id}`).update({ likes: likes + 1 });
+    if (favorites && favorites.includes(uid)) {
+      // firestore.doc(`tweets/${id}/favorites/${uid}`).delete();
+      let newFavorites = favorites.filter((fav) => {
+        return fav !== uid;
+      });
+
+      firestore.doc(`tweets/${id}`).update({ favorites: newFavorites });
+    } else {
+      firestore.doc(`tweets/${id}`).update({ favorites: [...favorites, uid] });
+      // firestore.doc(`tweets/${id}`).update({ likes: likes + 1 });
+    }
+  };
+
+  const getHeart = (id, likes, favorites, uid) => {
+    if (favorites && favorites.includes(uid)) {
+      return (
+        <span onClick={() => likeTweet(id, likes, favorites, uid)}>
+          <img src={FullLike} alt="" /> {favorites && favorites.length}
+        </span>
+      );
+    } else {
+      return (
+        <span onClick={() => likeTweet(id, likes, favorites, uid)}>
+          <img src={EmptyLike} alt="" /> {favorites && favorites.length}
+        </span>
+      );
+    }
   };
 
   return (
@@ -30,22 +56,16 @@ function Tweet({ tweets, user, color }) {
           <div className="tweet-container" key={tweet.id}>
             <img
               className="tweetForm-photo"
-              src={
-                !user
-                  ? Photo
-                  : tweet.uid === user.uid
-                  ? user.photoURL
-                  : PicDefault
-              }
-              alt=""
+              src={tweet.photo}
+              alt="profile-pic"
             />
             <div className="tweet-data">
               <div>
                 <h3>
-                  <span className="tweet-autor" id={color ? color : "white"}>
+                  <span className="tweet-autor" id={tweet.color}>
                     {tweet.autor}
                   </span>{" "}
-                  - fecha
+                  - fecha - {tweet.username}
                 </h3>
                 {!user ? null : user.uid === tweet.uid ? (
                   <img
@@ -59,10 +79,8 @@ function Tweet({ tweets, user, color }) {
                 ) : null} */}
               </div>
               <p>{tweet.tweet}</p>
-              <span onClick={() => likeTweet(tweet.id, tweet.likes)}>
-                <img src={tweet.likes ? FullLike : EmptyLike} alt="" />{" "}
-                <span>{tweet.likes ? tweet.likes : 0}</span>
-              </span>
+
+              {getHeart(tweet.id, tweet.likes, tweet.favorites, user.uid)}
             </div>
           </div>
         );
