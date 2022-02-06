@@ -11,6 +11,7 @@ function App() {
   const [usernames, setUsernames] = useState([]);
   const [username, setUsername] = useState({
     username: "",
+    photo: "",
     uid: "",
     email: "",
     color: "",

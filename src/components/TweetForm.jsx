@@ -22,6 +22,7 @@ function TweetForm({ tweet, setTweet, user, username, color }) {
     e.preventDefault();
 
     firestore.collection("tweets").add(tweet);
+    setTweet({ ...tweet, tweet: "" });
   };
 
   return (

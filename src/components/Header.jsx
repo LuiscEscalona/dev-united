@@ -7,12 +7,13 @@ function Header({ user, color, username }) {
   return (
     <div className="header-container">
       <div>
-        <img
-          className="header-photo"
-          id={username && username.color}
-          src={user ? user.photoURL : Photo}
-          alt=""
-        />
+        <div className="header-photo-container" id={username && username.color}>
+          <img
+            className="header-photo"
+            src={user ? user.photoURL : Photo}
+            alt=""
+          />
+        </div>
 
         <img src={Flag} alt="" />
 

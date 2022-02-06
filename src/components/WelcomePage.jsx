@@ -17,9 +17,10 @@ function WelcomePage({
   color,
   setColor,
 }) {
-  const [inputEnabled, setInputEnabled] = useState(false);
-  const [isSelected, setIsSelected] = useState(false);
+  // const [inputEnabled, setInputEnabled] = useState(false);
+  const [show, setShow] = useState(true);
   useEffect(() => {
+    console.log("efecto ejecutado");
     const unsubscribe = firestore
       .collection("usernames")
       .onSnapshot((snapshot) => {
@@ -28,62 +29,67 @@ function WelcomePage({
             id: doc.id,
             uid: doc.data().uid,
             username: doc.data().username,
+            photo: doc.data().photo,
             email: doc.data().email,
             color: doc.data().color,
           };
         });
         setUsernames(usernames);
-        console.log(usernames);
       });
     auth.onAuthStateChanged((user) => {
+      console.log("se ejecuto el onAuthChange", user);
+
+      usernames.forEach((username) => {
+        console.log(username.uid === user.uid);
+        if (username.uid === user.uid) {
+          setUsername(username);
+          // setInputEnabled(false);
+          setShow(false);
+        } else {
+          // setInputEnabled(true);
+          setShow(true);
+        }
+      });
+
       setUser(user);
     });
 
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    if (user) {
-      usernames.find((username) => {
-        if (username.uid === user.uid) {
-          setUsername(username);
-          setInputEnabled(false);
-          console.log(username);
-        } else {
-          setInputEnabled(true);
-        }
-      });
-
-      // if (username.username.length === 0) {
-      //   setInputEnabled(true);
-      // } else {
-      //   setInputEnabled(false);
-      // }
-
-      // const usernameVerification = usernames.forEach((username) => {
-      //   console.log(username);
-      //   if (username.uid === user.uid) {
-      //     return username;
-      //   }
-      // });
-
-      // console.log(verification);
-    }
-  }, [user]);
-
-  const colorSelection = (e) => {
-    setColor(e.target.id);
-    setIsSelected(true);
-  };
+  // useEffect(() => {
+  //   if (user) {
+  //     usernames.find((username) => {
+  //       if (username.uid === user.uid) {
+  //         setUsername(username);
+  //         setInputEnabled(false);
+  //         setShow(false);
+  //       } else {
+  //         setInputEnabled(true);
+  //         setShow(true);
+  //       }
+  //     });
+  //   }
+  // }, [user, usernames]);
 
   const handleChange = (e) => {
-    let nuevoUsername = {
+    let newUsername = {
       username: e.target.value,
       email: user.email,
+      photo: user.photoURL,
       uid: user.uid,
       color: color,
     };
-    setUsername(nuevoUsername);
+    setUsername(newUsername);
+  };
+
+  const colorSelection = (e) => {
+    let newUsername = {
+      ...username,
+      color: e.target.id,
+    };
+    setUsername(newUsername);
+    setColor(e.target.id);
   };
 
   const continueHandler = (e) => {
@@ -107,40 +113,64 @@ function WelcomePage({
             </>
           ) : (
             <>
-              <h1>WELCOME {user.displayName}!</h1>
-              {inputEnabled ? (
-                <input
-                  value={username.username}
-                  type="text"
-                  onChange={handleChange}
-                  placeholder="Type your usermane"
-                />
+              {show ? (
+                <>
+                  <h1>WELCOME {user.displayName}!</h1>
+                  <input
+                    value={username.username}
+                    name="username"
+                    type="text"
+                    onChange={handleChange}
+                    placeholder="Type your usermane"
+                  />
+                  <h3>Select your favorite color</h3>
+                  <div className="colorpicker">
+                    <div
+                      className="colorbox"
+                      id="pink"
+                      onClick={colorSelection}
+                    />
+                    <div
+                      value="orange"
+                      className="colorbox"
+                      id="orange"
+                      name="color"
+                      onClick={colorSelection}
+                    />
+                    <div
+                      value="yellow"
+                      className="colorbox"
+                      id="yellow"
+                      name="color"
+                      onClick={colorSelection}
+                    />
+                    <div
+                      value="green"
+                      className="colorbox"
+                      id="green"
+                      name="color"
+                      onClick={colorSelection}
+                    />
+                    <div
+                      value="blue"
+                      className="colorbox"
+                      id="blue"
+                      name="color"
+                      onClick={colorSelection}
+                    />
+                    <div
+                      value="violet"
+                      className="colorbox"
+                      id="violet"
+                      name="color"
+                      onClick={colorSelection}
+                    />
+                  </div>
+                  <img src={Continue} alt="" onClick={continueHandler} />
+                </>
               ) : (
-                <h3>You already have a username, lets go!</h3>
+                <div>ya existe</div>
               )}
-
-              <h3>Select your favorite color</h3>
-              <div className="colorpicker">
-                <div className="colorbox" id="pink" onClick={colorSelection} />
-                <div
-                  className="colorbox"
-                  id="orange"
-                  onClick={colorSelection}
-                />
-                <div
-                  className="colorbox"
-                  id="yellow"
-                  onClick={colorSelection}
-                />
-                <div className="colorbox" id="green" onClick={colorSelection} />
-                <div className="colorbox" id="blue" onClick={colorSelection} />
-                <div
-                  className="colorbox"
-                  id="violet"
-                  onClick={colorSelection}
-                />
-              </div>
-              <img src={Continue} alt="" onClick={continueHandler} />
             </>
           )}
           <span>© 2020 Devs_United - BETA</span>

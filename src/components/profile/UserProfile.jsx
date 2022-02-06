@@ -37,17 +37,20 @@ function UserProfile({
         </div>
       </div>
       <div className="username-container">
-        <img
-          className="username-pic"
-          id={username && username.color}
-          src={user ? user.photoURL : Photo}
-          alt=""
-        />
+        <div className="username-pic-container" id={username && username.color}>
+          <img
+            className="username-pic"
+            id={username && username.color}
+            src={user ? user.photoURL : Photo}
+            alt=""
+          />
+        </div>
+
         <h1 className="username" id={username && username.color}>
           {username ? username.username : "Cancuella"}
         </h1>
       </div>
-      {user ? (
+      {user && user.uid === username.uid ? (
         <>
           <div className="tabs-container">
             <div>
